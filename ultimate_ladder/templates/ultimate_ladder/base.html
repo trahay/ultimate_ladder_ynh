@@ -1,0 +1,54 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'ultimate_ladder/style.css' %}">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.datatables.net/rss.xml">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <style type="text/css" class="init">
+      
+    </style>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <title>Ultimate ultimate_ladder</title>
+  </head>
+  <body>
+      <header class="header">
+          <div class="container">
+              <a href="{%url 'index' %}" class="logo">Home</a>
+	      <nav class="nav">
+		  <a href="{% url 'leagues' %}">Leagues</a>
+		  <a href="{% url 'players' %}">Players</a>
+	      </nav>
+	  </div>
+      </header>
+      <main>
+	  <div class="container">
+	      {% if messages %}
+	      <div class="messages">
+		  {% for message in messages %}
+		  <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+		      {{ message }}
+		  </div>
+		  {% endfor %}
+	      </div>
+	      {% endif %}
+	      
+	      {%block content%} 
+	      {%endblock content%}
+	  </div>
+      </main>
+
+      <footer class="footer">
+          <div class="container">
+	    <a href="{% url 'add-league' %}" class="logo">Create League</a>
+	    <a href="{% url 'add-player' %}" class="logo">Create Player</a>
+          </div>
+      </footer>
+
+  </body>
+</html>

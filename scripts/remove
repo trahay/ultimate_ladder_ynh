@@ -9,52 +9,60 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-### Settings are automatically loaded as bash variables
-### in every app script context, therefore typically these will exist:
-### - $domain
-### - $path
-### - $language
-### - $install_dir
-### - $port
-### ...
-
-### For remove operations :
-### - the core will deprovision every resource defined in the manifest **after** this script is ran
-### this includes removing the install directory, and data directory (if --purge was used)
-
 #=================================================
-# REMOVE SYSTEM CONFIGURATIONS
+# STANDARD REMOVE
 #=================================================
-ynh_script_progression --message="Removing system configurations related to $app..." --weight=1
+# REMOVE SERVICE FROM ADMIN PANEL
+#=================================================
 
-### This should be a symetric version of what happens in the install script
-
-# Remove the service from the list of services known by YunoHost (added from `yunohost service add`)
-if ynh_exec_warn_less yunohost service status "$app" >/dev/null; then
-    ynh_script_progression --message="Removing $app service integration..." --weight=1
-    yunohost service remove "$app"
+# Remove a service from the admin panel, added by `yunohost service add`
+if yunohost service status $app >/dev/null 2>&1
+then
+	ynh_script_progression --message="Removing $app service integration..."
+	yunohost service remove $app
 fi
 
-ynh_remove_fail2ban_config
+#=================================================
+# STOP PYINVENTORY'S SERVICES
+#=================================================
+ynh_script_progression --message="Stopping and removing systemd service '$app'..." --weight=5
 
-ynh_remove_logrotate
+ynh_remove_systemd_config --service=$app
 
-ynh_remove_systemd_config
+##=================================================
+## REMOVE REDIS DB
+##=================================================
 
+ynh_redis_remove_db
+
+#=================================================
+# REMOVE APP MAIN DIR
+#=================================================
+ynh_script_progression --message="Removing app main directory..."
+
+# /var/www/$app/
+ynh_secure_remove --file="$install_dir"
+
+# /home/yunohost.app/$app/
+ynh_secure_remove --file="$data_dir"
+
+#=================================================
+# REMOVE NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing nginx web server configuration..."
+
+# Remove the dedicated nginx config
 ynh_remove_nginx_config
 
-ynh_remove_fpm_config
+#=================================================
+# REMOVE LOGROTATE CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing logrotate configuration..."
 
-# Remove other various files specific to the app... such as :
-
-ynh_secure_remove --file="/etc/cron.d/$app"
-
-ynh_secure_remove --file="/etc/$app"
-
-ynh_secure_remove --file="/var/log/$app"
+# Remove the app-specific logrotate config
+ynh_remove_logrotate
 
 #=================================================
 # END OF SCRIPT
 #=================================================
-
 ynh_script_progression --message="Removal of $app completed" --last

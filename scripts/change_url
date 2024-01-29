@@ -1,9 +1,5 @@
 #!/bin/bash
 
-## this script is only run if actual change to domain/path is detected, if you're here either $domain or $path changed
-## new location is available via $domain and $path (or $new_domain and $new_path variables if you want to be explicit)
-## old values are available via, you guessed it, $old_domain and $old_path
-
 #=================================================
 # GENERIC STARTING
 #=================================================
@@ -18,34 +14,33 @@ source /usr/share/yunohost/helpers
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
+ynh_script_progression --message="Stopping systemd service '$app'..."
 
-ynh_systemd_action --service_name="$app" --action="stop" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="stop" --log_path="$log_file"
 
 #=================================================
 # MODIFY URL IN NGINX CONF
 #=================================================
-ynh_script_progression --message="Updating NGINX web server configuration..." --weight=1
+ynh_script_progression --message="Updating nginx web server configuration..."
 
-# this will most likely adjust NGINX config correctly
 ynh_change_url_nginx_config
 
 #=================================================
-# SPECIFIC MODIFICATIONS
+# UPDATE DJANGO SETTINGS
 #=================================================
-# ...
-#=================================================
+ynh_script_progression --message="Update $app settings file..." --weight=1
 
-## do any changes to files that reference specific installation domain/path, i.e. regenerate configs etc
+path=$new_path
+domain=$new_domain
 
-#=================================================
-# GENERIC FINALISATION
+ynh_add_config --template="settings.py" --destination="$data_dir/settings.py"
+
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
+ynh_script_progression --message="Starting systemd service '$app'..." --weight=5
 
-ynh_systemd_action --service_name="$app" --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="start" --log_path="$log_file"
 
 #=================================================
 # END OF SCRIPT

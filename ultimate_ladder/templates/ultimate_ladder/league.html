@@ -1,0 +1,70 @@
+{% extends 'ultimate_ladder/base.html' %}
+	
+{% block content %}
+
+<script>
+    $(document).ready(function () {
+        $('#players').DataTable({
+	    order: [[4, 'desc']],
+	});
+    });
+</script>
+
+
+ 
+<h1>{{ league.name }} </h1>
+
+{% if league.game_set.count %}
+<h2>Ongoing games</h2>
+    <div>
+    {% for game in ongoing_games %}
+        <p><a href="{% url 'game' league.id game.id %}">{{ game.creation_date }}</a></p>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div>
+	<p>No ongoing game.</p>
+    </div>
+    {% endif %}
+
+
+    <table id="players" class="display compact" >
+	<thead><tr>
+	    <th>Player</th><th>Wins</th><th>Losses</th><th>Draws</th><th>Total Points</th><th>Score</th>
+	</tr></thead>
+	<tbody>
+	    {% for player in player_list %}
+	    <tr>
+		<td><a href="{% url 'player' player.player.id %}" class="{% if player.player.gender == 'f' %} woman {% else %} man {% endif %}">{{ player.player.name }}</a></td>
+		<td>{{player.win}}</td>
+		<td>{{player.loss}}</td>
+		<td>{{player.draw}}</td>
+		<td>{{player.total_points}}</td>
+		<td>{{player.player.score}}</td>
+	    </tr>
+	    {% endfor %}	    
+	</tbody>
+	
+    </table>
+
+    {% if completed_games.count > 0 %}
+    <h2>Archived games</h2>
+    <div>
+	{% for game in completed_games %}
+        <p><a href="{% url 'game' league.id game.id %}">{{ game.creation_date }}</a></p>
+	{% endfor %}
+    </div>
+    {% else %}
+    <div>
+	<p>No previous ongoing game.</p>
+    </div>
+    {% endif %}
+
+
+    <a href="{% url 'add-game' league.id %}" class="logo">New game</a>
+
+    <a href="{% url 'edit-league' league.id %}" class="logo">Edit League</a>
+
+    <a href="{% url 'delete-league' league.id %}" class="logo">Delete League</a>
+
+{% endblock content %}
