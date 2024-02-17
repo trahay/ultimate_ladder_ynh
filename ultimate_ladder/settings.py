@@ -25,8 +25,20 @@ SECRET_KEY = 'django-insecure-d9oorxbcx!a!x+x=36v5q3!q&5sbt$rcbg&qr9&69$rh#$-fe!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['__DOMAIN__']
 
+PATH_URL = '__PATH__'
+PATH_URL = PATH_URL.strip('/')
+
+YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
+
+
+LOG_LEVEL = '__LOG_LEVEL__'
+ADMIN_EMAIL = '__ADMIN_EMAIL__'
+DEFAULT_FROM_EMAIL = '__DEFAULT_FROM_EMAIL__'
+
+
+MANAGERS = ADMINS
 
 # Application definition
 
@@ -76,8 +88,13 @@ WSGI_APPLICATION = 'ultimate_ladder.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '__DB_NAME__',
+        'USER': '__DB_USER__',
+        'PASSWORD': '__DB_PWD__',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',  # Default Postgres Port
+        'CONN_MAX_AGE': 600,
     }
 }
 
