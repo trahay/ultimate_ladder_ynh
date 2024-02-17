@@ -56,7 +56,7 @@ ram.runtime = "50M"
 
     [install.admin_email]
     # Provides __ADMIN_EMAIL__ in templates
-    ask.en = "EMail address for error emails."
+    ask.en = "Email address for error emails."
     type = "email"
     example = "admin@example.com"
 
