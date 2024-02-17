@@ -83,8 +83,6 @@ ROOT_URLCONF = 'urls'  # .../conf/urls.py
 # -----------------------------------------------------------------------------
 
 
-MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

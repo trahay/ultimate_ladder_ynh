@@ -32,8 +32,6 @@ PATH_URL = PATH_URL.strip('/')
 
 YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
 
-MANAGERS = ADMINS
-
 # Application definition
 
 INSTALLED_APPS = [
