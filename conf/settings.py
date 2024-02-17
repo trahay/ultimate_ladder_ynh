@@ -38,17 +38,6 @@ PATH_URL = PATH_URL.strip('/')
 YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
 
 # -----------------------------------------------------------------------------
-# config_panel.toml settings:
-
-DEBUG_ENABLED = '__DEBUG_ENABLED__'
-DEBUG = DEBUG_ENABLED == '1'
-
-LOG_LEVEL = '__LOG_LEVEL__'
-ADMIN_EMAIL = '__ADMIN_EMAIL__'
-DEFAULT_FROM_EMAIL = '__DEFAULT_FROM_EMAIL__'
-
-
-# -----------------------------------------------------------------------------
 
 # Function that will be called to finalize a user profile:
 YNH_SETUP_USER = 'setup_user.setup_project_user'
@@ -93,8 +82,6 @@ ROOT_URLCONF = 'urls'  # .../conf/urls.py
 
 # -----------------------------------------------------------------------------
 
-
-ADMINS = (('__ADMIN__', ADMIN_EMAIL),)
 
 MANAGERS = ADMINS
 
