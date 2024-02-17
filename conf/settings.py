@@ -36,6 +36,7 @@ PATH_URL = '__PATH__'
 PATH_URL = PATH_URL.strip('/')
 
 YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
+LOG_LEVEL = '__LOG_LEVEL__'
 
 # -----------------------------------------------------------------------------
 
