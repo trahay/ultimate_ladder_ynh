@@ -32,13 +32,6 @@ PATH_URL = PATH_URL.strip('/')
 
 YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
 
-
-LOG_LEVEL = '__LOG_LEVEL__'
-ADMIN_EMAIL = '__ADMIN_EMAIL__'
-DEFAULT_FROM_EMAIL = '__DEFAULT_FROM_EMAIL__'
-
-ADMINS = (('__ADMIN__', ADMIN_EMAIL),)
-
 MANAGERS = ADMINS
 
 # Application definition
