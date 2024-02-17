@@ -105,8 +105,6 @@ SITE_DOMAIN = '__DOMAIN__'
 EMAIL_SUBJECT_PREFIX = f'[{SITE_TITLE}] '
 
 
-# E-mail address that error messages come from.
-SERVER_EMAIL = ADMIN_EMAIL
 
 # Default email address to use for various automated correspondence from
 # the site managers. Used for registration emails.
