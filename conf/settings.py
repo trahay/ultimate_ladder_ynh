@@ -154,6 +154,9 @@ LOGGING['loggers']['django_example'] = {
     'propagate': False,
 }
 
+for __logger_name in LOGGING['loggers'].keys():
+    LOGGING['loggers'][__logger_name]['level'] = 'DEBUG' if DEBUG else LOG_LEVEL
+
 # -----------------------------------------------------------------------------
 
 try:

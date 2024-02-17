@@ -43,6 +43,13 @@ ram.runtime = "50M"
     type = "group"
     default = "admins"
 
+    [install.log_level]
+    # Provides __LOG_LEVEL__ in templates
+    ask.en = "Logging level"
+    type = "select"
+    choices = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    default = "WARNING"
+
 
 [resources]
     [resources.system_user]
