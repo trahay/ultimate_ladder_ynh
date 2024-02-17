@@ -37,11 +37,28 @@ ram.runtime = "50M"
     type = "path"
     default = "/ultimate_ladder"
 
+    [install.admin]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    type = "user"
+    default = "admin"
+
     [install.init_main_permission]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     # This won't be saved as setting and will instead be used to initialize the SSOwat permission
     type = "group"
     default = "admins"
+
+    [install.default_from_email]
+    # Provides __DEFAULT_FROM_EMAIL__ in templates
+    ask.en = "Default email address to use for various automated emails."
+    type = "email"
+    example = "admin@example.com"
+
+    [install.admin_email]
+    # Provides __ADMIN_EMAIL__ in templates
+    ask.en = "EMail address for error emails."
+    type = "email"
+    example = "admin@example.com"
 
     [install.log_level]
     # Provides __LOG_LEVEL__ in templates

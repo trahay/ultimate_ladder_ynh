@@ -83,6 +83,8 @@ ROOT_URLCONF = 'urls'  # .../conf/urls.py
 
 # -----------------------------------------------------------------------------
 
+ADMINS = (('__ADMIN__', ADMIN_EMAIL),)
+MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
