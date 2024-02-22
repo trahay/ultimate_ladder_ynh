@@ -1,98 +1,50 @@
-#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
-
-packaging_format = 2
-
+name = "ultimate_ladder"
 id = "ultimate_ladder"
-name = "Ultimate Ladder"
-description.en = "A matchmaking website for creating balanced teams when playing ultimate frisbee"
-description.fr = "Un site web de matchmaking pour créer des équipes équilibrées lors d'un match d'ultimate frisbee"
+packaging_format = 1
+version = "0.1~ynh1"
+url = "https://github.com/trahay/ultimate_ladder_ynh"
+license = "MIT"
+previous_maintainers = [ ]
+multi_instance = false
+services = [ "nginx", "postgresql", "redis" ]
 
-version = "1.0~ynh1"
-
-maintainers = ["trahay"]
+[description]
+en = "A matchmaking website for creating balanced teams when playing ultimate frisbee."
 
 [upstream]
-# NB: Only the "license" key is mandatory. Remove entries for which there's no relevant data
 license = "MIT"
-admindoc = "https://github.com/trahay/ultimate_ladder_ynh/"
+website = "https://github.com/trahay/ultimate-ladder/"
 code = "https://github.com/trahay/ultimate-ladder/"
 
-[integration]
-yunohost = ">= 11.2"
-architectures = "all"
-multi_instance = true
-ldap = "true"
-sso = "true"
-disk = "300M"
-ram.build = "50M"
-ram.runtime = "50M"
+[maintainer]
+name = "François Trahay"
+email = "ftrahay@gmail.com"
 
-[install]
-    [install.domain]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    type = "domain"
+[requirements]
+yunohost = ">= 4.4"
 
-    [install.path]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    type = "path"
-    default = "/ultimate_ladder"
+[arguments]
 
-    [install.admin]
-    # this is a generic question - ask strings are automatically handled by Yunohost's core
-    type = "user"
-    default = "admin"
-
-    [install.init_main_permission]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    # This won't be saved as setting and will instead be used to initialize the SSOwat permission
-    type = "group"
-    default = "admins"
-
-    [install.default_from_email]
-    # Provides __DEFAULT_FROM_EMAIL__ in templates
-    ask.en = "Default email address to use for various automated emails."
-    type = "email"
-    example = "admin@example.com"
-
-    [install.admin_email]
-    # Provides __ADMIN_EMAIL__ in templates
-    ask.en = "Email address for error emails."
-    type = "email"
-    example = "admin@example.com"
-
-    [install.log_level]
-    # Provides __LOG_LEVEL__ in templates
-    ask.en = "Logging level"
-    type = "select"
-    choices = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    default = "WARNING"
-
+  [[arguments.install]]
+  name = "domain"
+  type = "domain"
+  
+  [[arguments.install]]
+  name = "path"
+  type = "path"
+  example = "/ultimate_ladder"
+  default = "/ultimate_ladder"
+  
+  [[arguments.install]]
+  name = "admin"
+  type = "user"
 
 [resources]
-    [resources.system_user]
-    # This will provision/deprovision a unix system user
 
-    [resources.install_dir]
-    # This will create/remove the install dir as /var/www/$app
-    # and store the corresponding setting $install_dir
+    [resources.sources]
 
-    [resources.data_dir]
-    # This will create/remove the data dir as /home/yunohost.app/$app
-    # and store the corresponding setting $data_dir
-
-    [resources.permissions]
-    # This will configure SSOwat permission for $domain/$path/
-    # The initial allowed group of user is configured via the init_main_permission question (public=visitors, private=all_users)
-    main.url = "/"
-
-    [resources.ports]
-    # This will pick a random port for reverse-proxying and store it as the $port setting
-
-    [resources.apt]
-    # This will automatically install/uninstall the following apt packages
-    # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
-    packages = "build-essential, python3-dev, python3-pip, python3-venv, git, libpq-dev, postgresql, postgresql-contrib"
-
-    [resources.database]
-    # This will automatically provision/deprovison a MySQL DB and store the corresponding credentials in settings $db_user, $db_name, $db_pwd
-    type = "postgresql"
+        [resources.sources.main]
+	url="https://github.com/trahay/ultimate-ladder/archive/refs/tags/0.1.tar.gz"
+	sha256="08bd25043712940a66b0e6695d3bbb04eb0f13d53d1482d9db7bad91da57aa1f"
+	
+	

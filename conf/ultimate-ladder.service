@@ -1,5 +1,5 @@
 [Unit]
-Description=__APP__ server
+Description=ultimate_ladder application server
 After=redis.service postgresql.service
 
 [Service]
