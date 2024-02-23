@@ -39,7 +39,7 @@ ynh_setup_source --dest_dir="$final_path"
 )
 
 (
-    cp -r "$final_path/ultimate_ladder/static/ultimate_ladder" "$public_path"
+    cp -r "$final_path/ultimate_ladder/static/ultimate_ladder" "$public_path/static"
 )
 
 mkdir -p "$log_path"

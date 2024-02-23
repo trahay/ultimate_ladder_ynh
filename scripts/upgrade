@@ -140,6 +140,10 @@ ynh_script_progression --message="Install project via pip..." --weight=45
 	ynh_exec_as $app $final_path/venv/bin/pip3 install --no-deps -r "$final_path/requirements.txt"
 )
 
+(
+    cp -r "$final_path/ultimate_ladder/static/ultimate_ladder" "$public_path/static"
+)
+
 #=================================================
 # copy config files
 # ================================================
