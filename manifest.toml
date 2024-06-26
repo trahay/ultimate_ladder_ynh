@@ -1,7 +1,7 @@
 name = "ultimate_ladder"
 id = "ultimate_ladder"
 packaging_format = 1
-version = "0.2~ynh1"
+version = "0.4~ynh1"
 url = "https://github.com/trahay/ultimate_ladder_ynh"
 license = "MIT"
 previous_maintainers = [ ]
