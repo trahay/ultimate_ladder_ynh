@@ -44,7 +44,7 @@ yunohost = ">= 4.4"
     [resources.sources]
 
         [resources.sources.main]
-	url="https://github.com/trahay/ultimate-ladder/archive/refs/tags/0.2.tar.gz"
-	sha256="c18a5b48151f9ffe14e940100e99f7726bbb4d3a67f22ba35c3c5d265af9db69"
+	url="https://github.com/trahay/ultimate-ladder/archive/refs/tags/0.4.tar.gz"
+	sha256="92f19d5cd437544d6dab3815a35d15452d9b08f0f3bccfb32b5e69db8cf1a918"
 	
 	
